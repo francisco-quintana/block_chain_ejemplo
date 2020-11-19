@@ -1,4 +1,4 @@
-# SignIn/SignUp App with custom hashing example
+# block_chain_ejemplito
 
 ## Instalación
 
@@ -28,4 +28,3 @@
 4. pip3 install -r requirements.txt
 
 5. flask run
-# block_chain_ejemplito
