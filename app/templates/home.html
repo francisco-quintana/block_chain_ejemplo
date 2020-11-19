@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    {{title}}
+    {{ super() }}
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+      <div class="card-header ">Añadir Nuevo Mensaje
+      </div>
+      <div class="card-body ">
+        <form method="POST" action="">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Mensaje:</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="mensaje" placeholder="Escriba su mensaje">
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary btn-sm mr-2 " type="submit">Guardar</button>
+           </div>
+        </form>
+      </div>
+    <!--Aqui empieza la cosa que se va a repetir-->
+    {% for sblock in dechain %}
+    {% if sblock[0]==0 %}
+    <p>indice: {{sblock[0]}}</p>
+    <p>fecha y hora: {{sblock[1]}}</p>
+    <p>hash: {{sblock[2]}}</p>
+    <p>mensaje: {{sblock[3]}}</p>
+    {% else %}
+    <p>indice: {{sblock[0]}}</p>
+    <p>fecha y hora: {{sblock[1]}}</p>
+    <p>hash: {{sblock[2]}}</p>
+    <p>hash anterior: {{sblock[3]}}</p>
+    <p>mensaje: {{sblock[4]}}</p>
+    {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+{% endblock content %}
