@@ -7,6 +7,7 @@
 {% endblock title %}
 
 {% block content %}
+<body>
 <div class="container">
     <div class="card">
       <div class="card-header ">Añadir Nuevo Mensaje
@@ -18,25 +19,37 @@
             <input type="text" class="form-control" id="formGroupExampleInput" name="mensaje" placeholder="Escriba su mensaje">
           </div>
           <div class="card-footer">
-            <button class="btn btn-primary btn-sm mr-2 " type="submit">Guardar</button>
+            <button class="btn btn-primary btn-sm mb-2 " type="submit">Guardar</button>
            </div>
         </form>
       </div>
+    </div>
+  </div>
+  <br>
     <!--Aqui empieza la cosa que se va a repetir-->
+    {% if dechain %}
+    <div class="container">
     {% for sblock in dechain %}
     {% if sblock[0]==0 %}
+    <div class="card">
     <p>indice: {{sblock[0]}}</p>
     <p>fecha y hora: {{sblock[1]}}</p>
     <p>hash: {{sblock[2]}}</p>
     <p>mensaje: {{sblock[3]}}</p>
+    </div>
+    <br>
     {% else %}
-    <p>indice: {{sblock[0]}}</p>
-    <p>fecha y hora: {{sblock[1]}}</p>
-    <p>hash: {{sblock[2]}}</p>
-    <p>hash anterior: {{sblock[3]}}</p>
-    <p>mensaje: {{sblock[4]}}</p>
+      <div class="card">
+        <p>indice: {{sblock[0]}}</p>
+        <p>fecha y hora: {{sblock[1]}}</p>
+        <p>hash: {{sblock[2]}}</p>
+        <p>hash anterior: {{sblock[3]}}</p>
+        <p>mensaje: {{sblock[4]}}</p>
+      </div>
+      <br>
     {% endif %}
     {% endfor %}
-    </div>
+    {% endif %}
   </div>
+</body>
 {% endblock content %}
