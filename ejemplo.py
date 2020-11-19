@@ -1,4 +1,5 @@
 from hashlib import sha256
+from datetime import datetime
 import time
 
 def hashear(message):
@@ -25,10 +26,12 @@ def hashearnonce(message,nonce):
 
 def add(msg,chain):
 	#si es el bloque genesis se agregan todos los campos excepto el hash anterior
+		now = datetime.now()
+		current_time = now.strftime("%H:%M:%S")
 		arr=[]
 		indice=len(chain)
 		arr.append(indice)
-		arr.append(time.asctime())
+		arr.append(current_time)
 		#se llama la funcion que nos devuelve el hash
 		arr2=hashear(msg)
 		arr.append(arr2[0])
@@ -46,11 +49,13 @@ def add(msg,chain):
 
 
 def edit(msg,chain,nonce):
+	now = datetime.now()
+	current_time = now.strftime("%H:%M:%S")
 	arr=[]
 	indice=len(chain)
 	indice=indice-1
 	a_hash=chain[indice-1][2]
-	chain[indice][1]=time.asctime()
+	chain[indice][1]=current_time
 	arr2=hashearnonce(msg,nonce)
 	chain[indice][2]=arr2[0]
 	chain[indice][3]=arr2[1]
@@ -61,9 +66,35 @@ def edit(msg,chain,nonce):
 	
 	return "Se va a cambiar "+msg
 
-def check(chain):
+def check(text):
+
+	message="no hubo errores"
+	lineList=[]
+	lineList2=[]
+	with open("blockchain.txt") as f:
+		lineList = [(line.strip()).split() for line in f]
+	with open(text+".txt") as f:
+		lineList2 = [(line.strip()).split() for line in f]
+	i=0
+	for line in lineList:
+		hs=line[2]
+		if(hs==lineList2[i][2]):
+			if (line[0]==str(len(lineList)-1)):
+				if not hs.startswith('00'):
+					message="error en la cadena. hash no empieza con cero"
+				else:
+					break
+			else:
+				if(hs!=lineList[i+1][4] and not hs.startswith('00')):
+					message="error en la cadena. mal enlazamiento de bloques"
+					i=i+1
+				else:
+					i=i+1
+		else:
+			message="error en la cadena. los hash no concuerdan"
+			i=i+1
 	
-	return "Se va a checar"
+	return message
 
 
 def see(chain):
@@ -101,7 +132,8 @@ def main(op,block):
 		print(edit(msg,block,nonce))
 		time.sleep(2)
 	elif op==3:
-		check(block)
+		msg= input('Cual es el nombre de tu archivo? ')
+		print(check(msg))
 		time.sleep(2)
 	#si escogio tres se ejecuta la funcion de ver
 	elif op==4:
@@ -116,7 +148,7 @@ if __name__ == '__main__':
 	blockchain=[]
 	while(True):
 		op = int(input("""
-	Select an option:
+	Selecciona una opción:
 
 	[1] Crear mensaje
 	[2] Editar
@@ -132,8 +164,9 @@ if __name__ == '__main__':
 			#manda a llamar al metodo main pasandole la opcion escogida "op"
 			main(op,blockchain)
 			#se crea un archivo donde se guardan los datos
-			file_out = open("blockchain.bin", "w")
+			file_out = open("blockchain.txt", "w")
 			for block in blockchain:
 				for i in block:
-		        		file_out.write("%s\n" % i)
+		        		file_out.write("%s " % i)
+				file_out.write("\n")
 			file_out.close()
