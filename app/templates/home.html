@@ -7,7 +7,6 @@
 {% endblock title %}
 
 {% block content %}
-<body>
 <div class="container">
     <div class="card">
       <div class="card-header ">Añadir Nuevo Mensaje
@@ -22,34 +21,39 @@
             <button class="btn btn-primary btn-sm mb-2 " type="submit">Guardar</button>
            </div>
         </form>
+        <br>
+        <a href="/"><button class="btn btn-success btn-sm mb-2 " type="submit">Recargar</button><a>
       </div>
     </div>
   </div>
   <br>
     <!--Aqui empieza la cosa que se va a repetir-->
-    {% if dechain %}
+    {% for user in users %}
     <div class="container">
-    {% for sblock in dechain %}
-    {% if sblock[0]==0 %}
+    <p>{{user["user"]}}</p>
+    {% for sblock in user["chain"] %}
+    {% if sblock["indice"]== 0 %}
     <div class="card">
-    <p>indice: {{sblock[0]}}</p>
-    <p>fecha y hora: {{sblock[1]}}</p>
-    <p>hash: {{sblock[2]}}</p>
-    <p>mensaje: {{sblock[3]}}</p>
+      <p>indice: {{sblock["indice"]}}</p>
+      <p>hora: {{sblock["hora"]}}</p>
+      <p>hash: {{sblock["hash"]}}</p>
+      <p>nonce: {{sblock["nonce"]}}</p>
+      <p>mensaje: {{sblock["mensaje"]}}</p>
     </div>
     <br>
     {% else %}
       <div class="card">
-        <p>indice: {{sblock[0]}}</p>
-        <p>fecha y hora: {{sblock[1]}}</p>
-        <p>hash: {{sblock[2]}}</p>
-        <p>hash anterior: {{sblock[3]}}</p>
-        <p>mensaje: {{sblock[4]}}</p>
+        <p>indice: {{sblock["indice"]}}</p>
+        <p>hora: {{sblock["hora"]}}</p>
+        <p>hash: {{sblock["hash"]}}</p>
+        <p>nonce: {{sblock["nonce"]}}</p>
+        <p>hash anterior: {{sblock["hash_a"]}}</p>
+        <p>mensaje: {{sblock["mensaje"]}}</p>
+        
       </div>
       <br>
     {% endif %}
     {% endfor %}
-    {% endif %}
-  </div>
-</body>
+    </div>
+    {% endfor %}
 {% endblock content %}

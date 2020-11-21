@@ -3,17 +3,18 @@
 from flask import render_template, redirect, url_for, flash, request
 # Local config
 from app import create_app
-import ejemplo
+from datetime import datetime
+#se importa la función para hash
+from ejemplo import hashear
+#se importa la base de datos
+import modelo
 
 # se crea la aplicación de flask
-dechain=[]
 app = create_app()
 
 #se le designa el nombre a la ruta
 @app.route('/', methods=['GET','POST'])
 def blog():
-    #se declara una variable con la instacia del formulario
-    global dechain
     #variables que se usan en la página
     context = {
         'title':'Blog'
@@ -21,9 +22,14 @@ def blog():
     #si se hace submit se ejecuta el siguiente código
     if request.method == 'POST':
         mensaje=request.form.get('mensaje')
-        ejemplo.add(mensaje,dechain)
+        hs_non=hashear(mensaje)
+        now = datetime.now()
+        tiempo = now.strftime("%H:%M:%S")
+        modelo.agregar(tiempo,hs_non[0],hs_non[1],mensaje)
+        
+
     #template que se va usar y variables que va a usar
-    return render_template('home.html', **context,len=len(dechain),dechain=dechain)
+    return render_template('home.html', **context,len=len(modelo.users),users=modelo.users)
 
 
 @app.route('/success')
