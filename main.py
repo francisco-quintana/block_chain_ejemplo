@@ -4,10 +4,14 @@ from flask import render_template, redirect, url_for, flash, request
 # Local config
 from app import create_app
 from datetime import datetime
+import dbconfig
 #se importa la función para hash
-from ejemplo import hashear
-#se importa la base de datos
 import modelo
+#se importa la base de datos
+
+###HACER QUE CUANDO SE SUBAN LOS DATOS SE SUBA A 6 COLECCIONES
+###BOTON DE CHECAR QUE RECORRE TODAS LAS COLECCIONES PARA VER QUE EVERYTHING IS FINE
+
 
 # se crea la aplicación de flask
 app = create_app()
@@ -22,10 +26,10 @@ def blog():
     #si se hace submit se ejecuta el siguiente código
     if request.method == 'POST':
         mensaje=request.form.get('mensaje')
-        hs_non=hashear(mensaje)
+        hs_non=modelo.hashear(mensaje)
         now = datetime.now()
         tiempo = now.strftime("%H:%M:%S")
-        modelo.agregar(tiempo,hs_non[0],hs_non[1],mensaje)
+        #modelo.agregar(tiempo,hs_non[0],hs_non[1],mensaje)
         
 
     #template que se va usar y variables que va a usar
