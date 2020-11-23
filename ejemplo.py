@@ -80,15 +80,17 @@ def add(msg):
 			arr=[]
 			#el indice es la longitud del arreglo actual
 			indice=len(lines)
-		#se busca el hash anterior;el ultimo bloque actual y se guarda en este bloque
+		#se busca el hash anterior;el ultimo bloque actual
 			a_hash=lines[indice-1][2]
 			#se agregan los campos
 			arr.append(indice)
 			arr.append(current_time)
-		#se llama la funcion que nos devuelve el hash y se agregan los valores que nos arroja
+		#se llama la funcion que nos devuelve el hash con el mensaje mas el hash anterior
+		#y se agregan los valores que nos arroja
 			arr2=hashear(a_hash+msg)
 			arr.append(arr2[0])
 			arr.append(arr2[1])
+			#se guarda en este bloque el hash anterior
 			arr.append(a_hash)
 			arr.append(msg)
 		#se anexa el bloque en el archivo llamado blockchain.txt separado por espacios
