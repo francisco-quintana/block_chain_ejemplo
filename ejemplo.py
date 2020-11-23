@@ -80,15 +80,15 @@ def add(msg):
 			arr=[]
 			#el indice es la longitud del arreglo actual
 			indice=len(lines)
+		#se busca el hash anterior;el ultimo bloque actual y se guarda en este bloque
+			a_hash=lines[indice-1][2]
 			#se agregan los campos
 			arr.append(indice)
 			arr.append(current_time)
 		#se llama la funcion que nos devuelve el hash y se agregan los valores que nos arroja
-			arr2=hashear(msg)
+			arr2=hashear(a_hash+msg)
 			arr.append(arr2[0])
 			arr.append(arr2[1])
-		#se busca el hash anterior;el ultimo bloque actual y se guarda en este bloque
-			a_hash=lines[indice-1][2]
 			arr.append(a_hash)
 			arr.append(msg)
 		#se anexa el bloque en el archivo llamado blockchain.txt separado por espacios
@@ -114,17 +114,20 @@ def edit(msg,nonce):
 	indice=indice-1
 	#se sobrescribe la hora del mensaje
 	chain[indice][1]=current_time
-	#se llama al metodo que nos pide darle el nonce y se sobreescribe el hash y el nonce del ultimo bloque
-	arr=hashearnonce(msg,nonce)
-	chain[indice][2]=arr[0]
-	chain[indice][3]=arr[1]
 	#si el bloque que estamos editando es el genesis esta en la posicion 4 ya no tiene hash anterior
 	if(len(chain)==1):
+		arr=hashearnonce(msg,nonce)
+		chain[indice][2]=arr[0]
+		chain[indice][3]=arr[1]
 		chain[indice][4]=msg
 	else:
+		a_hash=chain[indice-1][2]
+		#se llama al metodo que nos pide darle el nonce y se sobreescribe el hash y el nonce del ultimo bloque
+		arr=hashearnonce(a_hash+msg,nonce)
+		chain[indice][2]=arr[0]
+		chain[indice][3]=arr[1]
 	#si el bloque es cualquier otro se sobrescribe en la posicion 5
 		chain[indice][5]=msg
-		a_hash=chain[indice-1][2]
 	#se sobrescribe todo el archivo con la cadena de este metodo y con el ultimo bloque cambiado
 	file_out = open("blockchain.txt", "w")
 	for block in chain:
