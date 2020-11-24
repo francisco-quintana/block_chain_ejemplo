@@ -6,7 +6,7 @@ from app import create_app
 from datetime import datetime
 import dbconfig
 #se importa la función para hash
-import modelo
+import hasheo
 #se importa la base de datos
 
 ###HACER QUE CUANDO SE SUBAN LOS DATOS SE SUBA A 6 COLECCIONES
@@ -25,15 +25,48 @@ def blog():
     }
     #si se hace submit se ejecuta el siguiente código
     if request.method == 'POST':
-        mensaje=request.form.get('mensaje')
-        hs_non=modelo.hashear(mensaje)
-        now = datetime.now()
-        tiempo = now.strftime("%H:%M:%S")
-        #modelo.agregar(tiempo,hs_non[0],hs_non[1],mensaje)
-        
+        col=dict()
+        col=['francisco','adrian','melissa','joshua','victor','main']
+        n=dbconfig.db_users.francisco.count()
+        if n>0:
+            collection = dbconfig.db_users.francisco
+            ahash=""
+            cursor = collection.find({'_id':n-1},{'hash':1})
+            for x in cursor:
+                ahash=x['hash']
+            mensaje=request.form.get('mensaje')
+            hs_non=hasheo.hashear(mensaje+ahash)
+            now = datetime.now()
+            tiempo = now.strftime("%H:%M:%S")
+            user="francisco"
+            for x in col:
+                dbconfig.db_users[x].insert_one({
+                '_id': n,
+                'usuario':user,
+                'hora': tiempo,
+                'hash': hs_non[0],
+                'nonce':hs_non[1],
+                'ahash':ahash,
+                'mensaje':mensaje
+            })
+        else:
+            mensaje=request.form.get('mensaje')
+            hs_non=hasheo.hashear(mensaje)
+            now = datetime.now()
+            tiempo = now.strftime("%H:%M:%S")
+            user="francisco"
+            for x in col:
+                dbconfig.db_users[x].insert_one({
+                '_id': n,
+                'usuario':user,
+                'hora': tiempo,
+                'hash': hs_non[0],
+                'nonce':hs_non[1],
+                'mensaje':mensaje
+            })
 
     #template que se va usar y variables que va a usar
-    return render_template('home.html', **context,len=len(modelo.users),users=modelo.users)
+    return render_template('home.html', **context)
 
 
 @app.route('/success')
