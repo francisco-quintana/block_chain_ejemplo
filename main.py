@@ -24,12 +24,14 @@ def blog():
         'title':'Blog'
     }
     #si se hace submit se ejecuta el siguiente código
+    leng=dbconfig.db_users.main.count()
+    chain=dbconfig.db_users.main.find({})
     if request.method == 'POST':
         col=dict()
         col=['francisco','adrian','melissa','joshua','victor','main']
-        n=dbconfig.db_users.francisco.count()
+        n=dbconfig.db_users.main.count()
         if n>0:
-            collection = dbconfig.db_users.francisco
+            collection = dbconfig.db_users.main
             ahash=""
             cursor = collection.find({'_id':n-1},{'hash':1})
             for x in cursor:
@@ -64,9 +66,9 @@ def blog():
                 'nonce':hs_non[1],
                 'mensaje':mensaje
             })
-
+    
     #template que se va usar y variables que va a usar
-    return render_template('home.html', **context)
+    return render_template('home.html', **context,blockchain=chain)
 
 
 @app.route('/success')

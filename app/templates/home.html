@@ -28,13 +28,12 @@
   </div>
   <br>
     <!--Aqui empieza la cosa que se va a repetir-->
-    {% for user in users %}
+    {% for sblock in blockchain %}
     <div class="container">
-    <p>{{user["user"]}}</p>
-    {% for sblock in user["chain"] %}
-    {% if sblock["indice"]== 0 %}
+    {% if sblock["_id"]== 0 %}
     <div class="card">
-      <p>indice: {{sblock["indice"]}}</p>
+      <p>indice: {{sblock["_id"]}}</p>
+      <p>usuario: {{sblock["usuario"]}}</p>
       <p>hora: {{sblock["hora"]}}</p>
       <p>hash: {{sblock["hash"]}}</p>
       <p>nonce: {{sblock["nonce"]}}</p>
@@ -43,17 +42,16 @@
     <br>
     {% else %}
       <div class="card">
-        <p>indice: {{sblock["indice"]}}</p>
+        <p>indice: {{sblock["_id"]}}</p>
         <p>hora: {{sblock["hora"]}}</p>
         <p>hash: {{sblock["hash"]}}</p>
         <p>nonce: {{sblock["nonce"]}}</p>
-        <p>hash anterior: {{sblock["hash_a"]}}</p>
+        <p>hash anterior: {{sblock["ahash"]}}</p>
         <p>mensaje: {{sblock["mensaje"]}}</p>
         
       </div>
       <br>
     {% endif %}
-    {% endfor %}
     </div>
     {% endfor %}
 {% endblock content %}
