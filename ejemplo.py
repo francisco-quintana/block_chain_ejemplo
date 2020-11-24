@@ -72,13 +72,13 @@ def add(msg):
 		#se abre el archivo
 		with open("blockchain.txt","r+") as f:			
 			lines=[]
-			#se lee el archivo y separa cada linea en un arreglo y cada "palabra" en un campo del arreglo
+		#se lee el archivo y separa cada linea en un arreglo y cada "palabra" en un campo del arreglo
 			lines = [(line.strip()).split() for line in f]
-			#se obtiene el tiempo actual
+		#se obtiene el tiempo actual
 			now = datetime.now()
 			current_time = now.strftime("%H:%M:%S")
 			arr=[]
-			#el indice es la longitud del arreglo actual
+		#el indice es la longitud del arreglo actual
 			indice=len(lines)
 		#se busca el hash anterior;el ultimo bloque actual
 			a_hash=lines[indice-1][2]
