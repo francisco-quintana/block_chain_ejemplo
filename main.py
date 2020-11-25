@@ -1,15 +1,5 @@
 
 # Flask
-from flask import render_template, redirect, url_for, flash, request
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager
-# Local config
-from app import create_app
-from datetime import datetime
-import dbconfig
-#se importa la función para hash
-import hasheo
-#se importa la base de datos
 from flask import (
     Flask,
     g,
@@ -19,6 +9,14 @@ from flask import (
     session,
     url_for
 )
+from werkzeug.security import generate_password_hash, check_password_hash
+# Local config
+from app import create_app
+from datetime import datetime
+import dbconfig
+#se importa la función para hash
+import hasheo
+#se importa la base de datos
 
 class User:
     def __init__(self, id, username, password):
@@ -66,9 +64,6 @@ def login():
                     return redirect(url_for('login'))
         return redirect(url_for('login'))
     return render_template('login.html')
-
-###HACER QUE CUANDO SE SUBAN LOS DATOS SE SUBA A 6 COLECCIONES
-###BOTON DE CHECAR QUE RECORRE TODAS LAS COLECCIONES PARA VER QUE EVERYTHING IS FINE
 
 # se crea la aplicación de flask
 
