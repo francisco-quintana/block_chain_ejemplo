@@ -1,12 +1,17 @@
 
-.body{
+body{
   background-color:#000000;
+  background-image: url('https://i.pinimg.com/originals/4a/65/ab/4a65abeead3a8d113bccfee5d5d239f4.gif');
+  background-repeat: no-repeat;
+  background-position: 35%;
+  background-attachment: fixed;
+  min-height: 100%;
 }
 
 .container{
-  background-color:#000000;
+  background-color:rgba(0,0,0,0.7);
   color:white;
-  width: 100%;
+  width: 60%;
   height: 100%;
   padding-top: 2%;
   padding-bottom: 1%;
@@ -16,11 +21,10 @@
 
 .card  {
   color:white;
-   background-color: rgba(0, 0, 0, 0.767);
 
   }
 .card-header, .card-footer {
-   background-color:rgb(0, 0, 0);
+   background-color:rgba(0,0,0,0.1);
    opacity: 100;
    font-weight: bolder;
    font-size:18px;

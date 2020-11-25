@@ -1,0 +1,94 @@
+body {
+    color:white;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  background-image: url('https://i.pinimg.com/originals/4a/65/ab/4a65abeead3a8d113bccfee5d5d239f4.gif');
+  background-repeat: no-repeat;
+  background-position: 35%;
+  background-attachment: fixed;
+  min-height: 100%;
+  }
+  .centro{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+  }
+  img{
+    max-width: 100%;
+    height: 20vh;
+  
+   }
+  .contenedor{
+    background: linear-gradient( rgba(0, 0, 0, 0.918) 30%, #3b3b3b );
+  
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.678), 0 1px 50px rgba(0, 0, 0, 0.411);
+    padding: 2%;
+    margin-top: 4%;
+    border-radius: .5%;
+  }
+  input{
+    font-size:2.5vh;
+    background: #7383bb2f;
+    color:rgb(0, 0, 0);
+    border: none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0), 0 1px 50px rgba(0, 0, 0, 0.411);
+  
+  }
+  input:focus {
+    color:rgb(255, 255, 255);
+    background: #98abf03b;
+    transition: background 0.5s ease-out;
+  }
+  input, textarea{
+    color:rgb(255, 255, 255);
+  
+  
+  }
+  button {
+    margin-left: 5%;
+    width: 100%;
+    padding: 12px;
+    font-size:2vh;
+    font-weight: bold;
+    background: #22355e;
+    color:rgb(255, 255, 255);
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 15px;
+    transition: background 0.5s ease-out;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.678), 0 1px 50px rgba(0, 0, 0, 0.411);
+  
+  }
+  button:hover {
+    background:#0278ae;
+    color:rgb(255, 255, 255);
+    font-weight:bolder;
+    transition: color 0.2s ease-out;
+    transition: background 0.5s ease-out;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.678), 0 1px 50px rgba(0, 0, 0, 0.411);
+  
+  }
+  h2{
+    font-size:5vh;
+    text-align: center;
+    margin-bottom: 3%;
+    color:rgb(255, 255, 255);
+    letter-spacing:5px;
+  }
+  h4{
+    color:rgb(255, 255, 255);
+  
+  
+  }
+  
+  
+  @media screen and (max-width: 800px){
+  button {
+    margin-left: 1%;}
+  }

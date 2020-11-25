@@ -7,6 +7,21 @@
 {% endblock title %}
 
 {% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">{{g.user.username}}'s Profile</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/">log out</a></li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
     <div class="card">
       <div class="card-header ">Añadir Nuevo Mensaje
@@ -17,12 +32,12 @@
             <label for="formGroupExampleInput">Mensaje:</label>
             <input type="text" class="form-control" id="formGroupExampleInput" name="mensaje" placeholder="Escriba su mensaje">
           </div>
-          <div class="card-footer">
-            <button class="btn btn-primary btn-sm mb-2 " type="submit">Guardar</button>
+          <div class="card-footer ">
+            <button class="btn btn-primary btn-sm mb-6 col-lg-6 " type="submit">Guardar</button>
+            
            </div>
         </form>
-        <br>
-        <a href="/"><button class="btn btn-success btn-sm mb-2 " type="submit">Recargar</button><a>
+        <a href="/"><button class="btn btn-success btn-sm mb-6 col-lg-6 " type="submit">Recargar</button><a></a>
       </div>
     </div>
   </div>
@@ -43,6 +58,7 @@
     {% else %}
       <div class="card">
         <p>indice: {{sblock["_id"]}}</p>
+        <p>usuario: {{sblock["usuario"]}}</p>
         <p>hora: {{sblock["hora"]}}</p>
         <p>hash: {{sblock["hash"]}}</p>
         <p>nonce: {{sblock["nonce"]}}</p>
