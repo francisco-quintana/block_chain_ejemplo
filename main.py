@@ -63,7 +63,7 @@ def login():
                 else:
                     return redirect(url_for('login'))
         return redirect(url_for('login'))
-    return render_template('app/templates/login.html')
+    return render_template('login.html')
 
 # se crea la aplicación de flask
 
@@ -124,9 +124,6 @@ def blog():
     
     #template que se va usar y variables que va a usar
     return render_template('home.html', **context,blockchain=chain)
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 #@app.route('/', defaults={'login': ''})
 #@app.route('/<path:login>')
