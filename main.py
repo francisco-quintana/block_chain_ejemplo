@@ -68,7 +68,7 @@ def login():
 # se crea la aplicación de flask
 
 #se le designa el nombre a la ruta
-@app.route('/home', methods=['GET','POST'])
+@app.route('/', methods=['GET','POST'])
 def blog():
     #variables que se usan en la página
     context = {
@@ -125,7 +125,7 @@ def blog():
     #template que se va usar y variables que va a usar
     return render_template('home.html', **context,blockchain=chain)
 
-@app.route('/', defaults={'login': ''})
+#@app.route('/', defaults={'login': ''})
 @app.route('/<path:login>')
 def catch_all(login):
     return redirect(url_for('login'))
