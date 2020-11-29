@@ -35,7 +35,7 @@ users.append(User(id=4, username='Melissa', password='123'))
 users.append(User(id=5, username='Komaba', password='123'))
 users.append(User(id=6, username='Main', password='1234'))
 
-app = Flask(__name__)
+#app = create_app()
 
 @app.before_request
 def before_request():
@@ -124,6 +124,9 @@ def blog():
     
     #template que se va usar y variables que va a usar
     return render_template('home.html', **context,blockchain=chain)
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 #@app.route('/', defaults={'login': ''})
 #@app.route('/<path:login>')
