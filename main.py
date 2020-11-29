@@ -13,7 +13,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # Local config
 from app import create_app
 from datetime import datetime
-import dbconfig
+from dbconfig import db_users
 #se importa la función para hash
 import hasheo
 #se importa la base de datos
@@ -75,17 +75,17 @@ def blog():
     }
     #si se hace submit se ejecuta el siguiente código
     
-    leng=dbconfig.db_users.Main.count()
-    chain=dbconfig.db_users.Main.find({})
+    leng=db_users.Main.count()
+    chain=db_users.Main.find({})
     if request.method == 'POST':
         col=[]
         counter=0
         for x in users:
             col.append(str(x.username))
         # col=['francisco','adrian','melissa','joshua','victor','main']
-        n=dbconfig.db_users.Main.count()
+        n=db_users.Main.count()
         if n>0:
-            collection = dbconfig.db_users.Main
+            collection = db_users.Main
             ahash=""
             cursor = collection.find({'_id':n-1},{'hash':1})
             for x in cursor:
@@ -96,7 +96,7 @@ def blog():
             tiempo = now.strftime("%H:%M:%S")
             user=g.user.username
             for x in col:
-                dbconfig.db_users[x].insert_one({
+                db_users[x].insert_one({
                 '_id': n,
                 'usuario':user,
                 'hora': tiempo,
@@ -112,7 +112,7 @@ def blog():
             tiempo = now.strftime("%H:%M:%S")
             user=g.user.username
             for x in col:
-                dbconfig.db_users[x].insert_one({
+                db_users[x].insert_one({
                 '_id': n,
                 'usuario':user,
                 'hora': tiempo,
