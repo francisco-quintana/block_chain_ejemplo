@@ -46,7 +46,7 @@ def before_request():
         g.user = user
         
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session.pop('user_id', None)
@@ -68,7 +68,7 @@ def login():
 # se crea la aplicación de flask
 
 #se le designa el nombre a la ruta
-@app.route('/home', methods=['GET','POST'])
+@app.route('/home/', methods=['GET','POST'])
 def blog():
     #variables que se usan en la página
     context = {
