@@ -2,4 +2,4 @@
 /__pycache__
 /app/__pycache__
 modelo.py
-#dbconfig.py
+dbconfig.py
