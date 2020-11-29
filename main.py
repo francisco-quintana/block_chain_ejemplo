@@ -11,7 +11,7 @@ from flask import (
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 # Local config
-from app import create_app
+from blockchain12 import create_app
 from datetime import datetime
 import dbconfig
 #se importa la función para hash
@@ -45,7 +45,7 @@ def before_request():
         user = [x for x in users if x.id == session['user_id']][0]
         g.user = user
         
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session.pop('user_id', None)
@@ -67,7 +67,7 @@ def login():
 # se crea la aplicación de flask
 
 #se le designa el nombre a la ruta
-@app.route('/home/', methods=['GET','POST'])
+@app.route('/home', methods=['GET','POST'])
 def blog():
     #variables que se usan en la página
     context = {
