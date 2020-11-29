@@ -11,7 +11,7 @@ from flask import (
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 # Local config
-from app import create_app
+#from app import create_app
 from datetime import datetime
 import dbconfig
 #se importa la función para hash
@@ -19,7 +19,8 @@ import hasheo
 #se importa la base de datos
 
 # se crea la aplicación de flask
-app = create_app()
+#app = create_app()
+app = Flask(__name__)
 
 class User:
     def __init__(self, id, username, password):
