@@ -63,7 +63,7 @@ def login():
                 else:
                     return redirect(url_for('login'))
         return redirect(url_for('login'))
-    return render_template('login.html')
+    return render_template('app/templates/login.html')
 
 # se crea la aplicación de flask
 
