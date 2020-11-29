@@ -13,10 +13,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 # Local config
 from app import create_app
 from datetime import datetime
-#se importa la base de datos
-from app import dbconfig
+import dbconfig
 #se importa la función para hash
-from app import hasheo
+import hasheo
+#se importa la base de datos
 
 # se crea la aplicación de flask
 app = create_app()
