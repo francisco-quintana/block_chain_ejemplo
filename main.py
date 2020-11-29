@@ -45,7 +45,6 @@ def before_request():
         user = [x for x in users if x.id == session['user_id']][0]
         g.user = user
         
-@app.route('/', methods=['GET', 'POST'])
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -125,7 +124,7 @@ def blog():
     #template que se va usar y variables que va a usar
     return render_template('home.html', **context,blockchain=chain)
 
-#@app.route('/', defaults={'login': ''})
-#@app.route('/<path:login>')
-#def catch_all(login):
+@app.route('/', defaults={'login': ''})
+@app.route('/<path:login>')
+def catch_all(login):
     #return redirect(url_for('login'))
