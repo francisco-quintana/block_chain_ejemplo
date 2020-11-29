@@ -35,7 +35,8 @@ users.append(User(id=4, username='Melissa', password='123'))
 users.append(User(id=5, username='Komaba', password='123'))
 users.append(User(id=6, username='Main', password='1234'))
 
-app = create_app()
+app = Flask(__name__)
+#app = create_app()
 
 @app.before_request
 def before_request():
@@ -129,3 +130,6 @@ def blog():
 @app.route('/<path:login>')
 def catch_all(login):
     return redirect(url_for('login'))
+
+if __name__ == '__main__':
+    app.run()
