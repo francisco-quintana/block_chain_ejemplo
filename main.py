@@ -125,15 +125,6 @@ def blog():
     #template que se va usar y variables que va a usar
     return render_template('home.html', **context,blockchain=chain)
 
-
-@app.route('/success')
-def success():
-    #se crean llaves publicas y privadas RSA
-    public_key=1
-    private_key=2
-    #se le pasan las variables creadas a el template
-    return render_template('success.html',pukey=public_key,prkey=private_key)
-
 @app.route('/', defaults={'login': ''})
 @app.route('/<path:login>')
 def catch_all(login):
