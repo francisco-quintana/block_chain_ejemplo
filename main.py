@@ -18,6 +18,9 @@ import dbconfig
 import hasheo
 #se importa la base de datos
 
+# se crea la aplicación de flask
+app = create_app()
+
 class User:
     def __init__(self, id, username, password):
         self.id = id
@@ -35,7 +38,6 @@ users.append(User(id=4, username='Melissa', password='123'))
 users.append(User(id=5, username='Komaba', password='123'))
 users.append(User(id=6, username='Main', password='1234'))
 
-app = create_app()
 
 @app.before_request
 def before_request():
@@ -45,7 +47,7 @@ def before_request():
         user = [x for x in users if x.id == session['user_id']][0]
         g.user = user
         
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         session.pop('user_id', None)
@@ -64,10 +66,8 @@ def login():
         return redirect(url_for('login'))
     return render_template('login.html')
 
-# se crea la aplicación de flask
-
 #se le designa el nombre a la ruta
-@app.route('/home/', methods=['GET','POST'])
+@app.route('/home', methods=['GET','POST'])
 def blog():
     #variables que se usan en la página
     context = {
