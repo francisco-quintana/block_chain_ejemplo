@@ -122,6 +122,7 @@ def blog():
         elif 'check' in request.form:
             uchain=dbconfig.db_users[g.user.username].find({})
             message=functions.check(chain,uchain)
+            chain=uchain
     
     #template que se va usar y variables que va a usar
     return render_template('home.html', **context, blockchain=chain, mensaje=message)
