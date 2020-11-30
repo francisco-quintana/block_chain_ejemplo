@@ -1,4 +1,5 @@
 from hashlib import sha256
+import dbconfig
 
 def hashear(message):
 	#se convierte a binarios el mensaje que se llama
@@ -19,4 +20,17 @@ def hashear(message):
 	#nos devuelve el hash y el nonce
 	return [hs,nonce]
 
-#si quieres cambiar algo del chain solo se utiliza la variable
+def check(obj1,obj2):
+	i=0
+	#for que itera cada bloque
+	for line in obj1:
+		#se obtiene el hash actual
+		hs=line['hash']
+		#si el hash es igual que el de la copia continua si no se rompe el for y obtenemos un mensaje de error
+		if(hs==obj2[i]['hash']):
+			message="todo bien"
+			i=i+1
+		else:
+			message="la cadena principal ha sido modificada en el indice "+str(line['_id'])
+			break	
+	return message

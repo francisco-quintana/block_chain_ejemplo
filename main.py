@@ -15,7 +15,7 @@ from app import create_app
 from datetime import datetime
 import dbconfig
 #se importa la función para hash
-import hasheo
+import functions
 #se importa la base de datos
 
 # se crea la aplicación de flask
@@ -73,30 +73,31 @@ def blog():
     context = {
         'title':'Blog'
     }
-    #si se hace submit se ejecuta el siguiente código
-    
     leng=dbconfig.db_users.Main.count()
     chain=dbconfig.db_users.Main.find({})
+    message=""
+    #si se hace submit se ejecuta el siguiente código
     if request.method == 'POST':
-        col=[]
-        counter=0
-        for x in users:
-            col.append(str(x.username))
-        # col=['francisco','adrian','melissa','joshua','victor','main']
-        n=dbconfig.db_users.Main.count()
-        if n>0:
-            collection = dbconfig.db_users.Main
-            ahash=""
-            cursor = collection.find({'_id':n-1},{'hash':1})
-            for x in cursor:
-                ahash=x['hash']
-            mensaje=request.form.get('mensaje')
-            hs_non=hasheo.hashear(mensaje+ahash)
-            now = datetime.now()
-            tiempo = now.strftime("%H:%M:%S")
-            user=g.user.username
-            for x in col:
-                dbconfig.db_users[x].insert_one({
+        if 'guardar' in request.form:
+            col=[]
+            counter=0
+            for x in users:
+                col.append(str(x.username))
+            # col=['francisco','adrian','melissa','joshua','victor','main']
+            n=dbconfig.db_users.Main.count()
+            if n>0:
+                collection = dbconfig.db_users.Main
+                ahash=""
+                cursor = collection.find({'_id':n-1},{'hash':1})
+                for x in cursor:
+                    ahash=x['hash']
+                mensaje=request.form.get('mensaje')
+                hs_non=functions.hashear(mensaje+ahash)
+                now = datetime.now()
+                tiempo = now.strftime("%H:%M:%S")
+                user=g.user.username
+                for x in col:
+                    dbconfig.db_users[x].insert_one({
                 '_id': n,
                 'usuario':user,
                 'hora': tiempo,
@@ -105,14 +106,14 @@ def blog():
                 'ahash':ahash,
                 'mensaje':mensaje
             })
-        else:
-            mensaje=request.form.get('mensaje')
-            hs_non=hasheo.hashear(mensaje)
-            now = datetime.now()
-            tiempo = now.strftime("%H:%M:%S")
-            user=g.user.username
-            for x in col:
-                dbconfig.db_users[x].insert_one({
+            else:
+                mensaje=request.form.get('mensaje')
+                hs_non=functions.hashear(mensaje)
+                now = datetime.now()
+                tiempo = now.strftime("%H:%M:%S")
+                user=g.user.username
+                for x in col:
+                    dbconfig.db_users[x].insert_one({
                 '_id': n,
                 'usuario':user,
                 'hora': tiempo,
@@ -120,9 +121,12 @@ def blog():
                 'nonce':hs_non[1],
                 'mensaje':mensaje
             })
+        elif 'check' in request.form:
+            uchain=dbconfig.db_users[g.user.username].find({})
+            message=functions.check(chain,uchain)
     
     #template que se va usar y variables que va a usar
-    return render_template('home.html', **context,blockchain=chain)
+    return render_template('home.html', **context,blockchain=chain,mensaje=message)
 
 @app.route('/', defaults={'login': ''})
 @app.route('/<path:login>')
