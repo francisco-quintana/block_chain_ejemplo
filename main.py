@@ -72,7 +72,6 @@ def blog():
     context = {
         'title':'Blog'
     }
-    leng=dbconfig.db_users.Main.count()
     chain=dbconfig.db_users.Main.find({})
     message=""
     #si se hace submit se ejecuta el siguiente código
@@ -125,7 +124,7 @@ def blog():
             message=functions.check(chain,uchain)
     
     #template que se va usar y variables que va a usar
-    return render_template('home.html', **context,blockchain=chain,mensaje=message)
+    return render_template('home.html', **context, blockchain=chain, mensaje=message)
 
 @app.route('/', defaults={'login': ''})
 @app.route('/<path:login>')

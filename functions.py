@@ -31,6 +31,6 @@ def check(obj1,obj2):
 			message="todo bien"
 			i=i+1
 		else:
-			message="la cadena principal ha sido modificada en el indice "+str(line['_id'])
-			break	
+			message="la cadena principal ha sido vulnerada en el indice "+str(line['_id'])
+			break
 	return message
