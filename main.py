@@ -41,7 +41,7 @@ users.append(User(id=6, username='Main', password='1234'))
 
 @app.before_request
 def before_request():
-    #g.user = None
+    g.user = None
     if 'user_id' in session:
         user = [x for x in users if x.id == session['user_id']][0]
         g.user = user
