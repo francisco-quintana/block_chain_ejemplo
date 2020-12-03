@@ -1,9 +1,9 @@
 #poner la configuracion de mongo
 from flask_pymongo import pymongo
 
-DB_USER = "theroot1234"
-DB_PASSWORD = "5BcHItSwjWGvQYwF"
-DB_HOST = "clusterhash.jkruq"
+DB_USER = "****"
+DB_PASSWORD = "****"
+DB_HOST = "******"
 DB_NAME = "usuarios"
 
 
